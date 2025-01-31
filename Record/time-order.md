@@ -18,7 +18,7 @@ Gogot认为，游戏是由一个个场景组成的，而一个个场景中的背
 ### Object中的从属关系
 
 1. Node节点
-  1. Node3D - 3D
+   1. Node3D - 3D
      - ...
   2. CanvasItem
 	  1. Node2D - 2D
