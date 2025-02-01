@@ -70,7 +70,7 @@ Gogot认为，游戏是由一个个场景组成的，而一个个场景中的背
 
    - 是否按下某键 is_key_pressed( keycode || Key.KEY_ANY)
    - 按下按键触发 _input(event: InputEvent)
-     - 应当先判断事件类型是否为键盘类型 - InputEventKey
+     应当先判断事件类型是否为键盘类型 - InputEventKey
      - 优点：能够判断状态
         - 持续按压 - echo
         - 按下瞬间 - pressed
