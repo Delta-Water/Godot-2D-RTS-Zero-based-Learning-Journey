@@ -133,5 +133,68 @@ Gogot认为，游戏是由一个个场景组成的，而一个个场景中的背
 1. 获取当前场景的根节点
 
    ```
-   this.get_tree().current_scene
+   root = this.get_tree().current_scene
+   ```
+
+2. 寻找某一节点
+
+   ```
+   root = this.get_tree().current_scene
+   a_node = root.find_child("a_node_name_string")
+   ```
+
+3. 删除某一节点
+
+   ```
+   root = this.get_tree().current_scene
+   a_node = root.find_child("a_node_name_string")
+   a_node.queue_free()
+   ```
+
+4. 更改节点的父子关系
+
+   ```
+   root = this.get_tree().current_scene
+   a_node = root.find_child("a_node_name_string")
+   root.remove_child(a_node)
+   this.add_child(a_node)
+   ```
+
+5. 新建一个子节点
+
+   ```
+   new_node = new Node2D()
+   new_node.Name = "new"
+   this.add_child(new_node)
+   ```
+
+6. 获取父节点
+
+   ```
+   this.get_parent()
+   ```
+   
+6. 获取一个节点
+
+   ```
+   get_node("node_path")
+   ```
+
+   ```
+   ┖╴root
+	  ┠╴Character（你在这里！）
+	  ┃  ┠╴Sword
+	  ┃  ┖╴Backpack
+	  ┃     ┖╴Dagger
+	  ┠╴MyGame
+	  ┖╴Swamp
+	    ┠╴Alligator
+	    ┠╴Mosquito
+	    ┖╴Goblin
+   
+   # 对于以上这个节点树，以下这些用于获取节点的相对路径都是有效的
+   get_node("Sword")
+   get_node("Backpack/Dagger")
+   get_node("../Swamp/Alligator")
+   get_node("/root/MyGame")
    ```
