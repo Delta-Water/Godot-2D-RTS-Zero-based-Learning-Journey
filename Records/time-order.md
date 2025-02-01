@@ -94,10 +94,10 @@ Gogot认为，游戏是由一个个场景组成的，而一个个场景中的背
      ```
      func _input(event):
          if event is InputEventMouseButton:
-		print("Mouse Click/Unclick at: ", event.position)
+             print("Mouse Click/Unclick at: ", event.position)
          elif event is InputEventMouseMotion:
-		print("Mouse Motion at: ", event.position)
-		print(event.relative)
+             print("Mouse Motion at: ", event.position)
+             print(event.relative)
      ```
 
 5. 输入映射
