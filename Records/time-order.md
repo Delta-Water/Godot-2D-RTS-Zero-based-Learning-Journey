@@ -35,13 +35,13 @@ Gogot认为，游戏是由一个个场景组成的，而一个个场景中的背
 ### 脚本基础
 
 1. 脚本的几个重要方法：
-   1. enter_tree() - 创建
+   1. _enter_tree() - 创建
       - 系统正序调用
-   2. ready() - 所有子节点创建
+   2. _ready() - 所有子节点创建
       - 系统倒序调用
-   3. process() - 帧
-   4. physics_process() - 物理计算
-   5. exit_tree() - 销毁
+   3. _process() - 帧
+   4. _physics_process() - 物理计算
+   5. _exit_tree() - 销毁
 
 请不要在`enter_tree()`中放置涉及和子节点有关的初始化代码，因为此时子节点可能还没有被创建
 
