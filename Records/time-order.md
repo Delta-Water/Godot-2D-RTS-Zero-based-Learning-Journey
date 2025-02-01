@@ -198,3 +198,7 @@ Gogot认为，游戏是由一个个场景组成的，而一个个场景中的背
    get_node("../Swamp/Alligator")
    get_node("/root/MyGame")
    ```
+
+### 游戏场景的基本使用
+
+1. 
