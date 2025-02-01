@@ -127,3 +127,11 @@ Gogot认为，游戏是由一个个场景组成的，而一个个场景中的背
       v = Input.get_vector("左", "右", "上", "下")
      print(v)
      ```
+
+### 获取父子节点
+
+1. 获取当前场景的根节点
+   
+   ```
+   this.get_tree().current_scene
+   ```
