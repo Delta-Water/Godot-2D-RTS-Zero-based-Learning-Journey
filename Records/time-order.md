@@ -83,7 +83,7 @@ Gogot认为，游戏是由一个个场景组成的，而一个个场景中的背
                  print("T was pressed")
      ```
 
-3. _Input
+3. _input
    - 键盘输入事件如上
    - 鼠标输入事件 - InputEventMouse
      - 相仿的，也有事件属性
@@ -95,16 +95,31 @@ Gogot认为，游戏是由一个个场景组成的，而一个个场景中的背
 
 4. 输入映射
    - 可以设置一些自定义的虚拟按键
-   - 通过设定一个虚拟按键的名称和指定这个虚拟按键触发需要的物理按键即可映射
+   - 通过在`项目设置`中设定一个虚拟按键的名称和指定这个虚拟按键触发需要的物理按键即可映射
    - 可以多个物理按键指向同一个虚拟按键
      ```
-     # 刚按下
-     if event.is_action_just_pressed("jump"):
-         jump_start()
-     # 按下中
-     if event.is_action_pressed("jump"):
-         jump_continue()
-     # 刚释放
-     if event.is_action_just_released("jump"):
-         jump_over()
+     func _input(event):
+         # 刚按下
+         if event.is_action_just_pressed("jump"):
+             jump_start()
+     
+         # 按下中
+         if event.is_action_pressed("jump"):
+             jump_continue()
+     
+         # 刚释放
+         if event.is_action_just_released("jump"):
+             jump_over()
+     
+     # 获取轴向[0,1]，按下是1，释放是0，对于游戏手柄扳机则有中间值
+     s = Input.get_action_strength("jump")
+     print(s)
+     
+     # 获取轴向[-1, 1]，前一个虚拟按键按下是-1，后一个是1，两个都不按是0
+     h = Input.get_axis("squat", "jump")
+     print(h)
+
+     # 获取向量Vector2（二维向量），举个栗子：存在上下左右四个方向，上下为一组，左右为一组，按下或右则返回值1，按上或左则返回-1，组合为（左右，上下）这样的向量
+      v = Input.get_vector("左", "右", "上", "下")
+     print(v)
      ```
