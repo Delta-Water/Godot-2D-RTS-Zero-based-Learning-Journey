@@ -98,6 +98,7 @@ Gogot认为，游戏是由一个个场景组成的，而一个个场景中的背
    - 通过在`项目设置`中设定一个虚拟按键的名称和指定这个虚拟按键触发需要的物理按键即可映射
    - 可以多个物理按键指向同一个虚拟按键
      ```
+     # _input有关按键映射的常用方法
      func _input(event):
          # 刚按下
          if event.is_action_just_pressed("jump"):
@@ -110,7 +111,8 @@ Gogot认为，游戏是由一个个场景组成的，而一个个场景中的背
          # 刚释放
          if event.is_action_just_released("jump"):
              jump_over()
-     
+
+     # Input类中有关按键映射的常用方法
      # 获取轴向[0,1]，按下是1，释放是0，对于游戏手柄扳机则有中间值
      s = Input.get_action_strength("jump")
      print(s)
