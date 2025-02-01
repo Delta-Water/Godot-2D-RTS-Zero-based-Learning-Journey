@@ -68,17 +68,43 @@ Gogot认为，游戏是由一个个场景组成的，而一个个场景中的背
 2. 按键输入
 ###### 放在_process中判断（逐帧判断按键的按下情况）
 
-   - 是否按下某键 is_key_pressed( keycode || Key.KEY_ANY)
+   - 是否按下某键 is_key_pressed(keycode || Key.KEY_ANY)
    - 按下按键触发 _input(event: InputEvent)
-     应当先判断事件类型是否为键盘类型 - InputEventKey
-     - 优点：能够判断状态
+     - 应当先判断事件类型是否为键盘类型 - InputEventKey
+     - 优点：能通过属性够判断状态
         - 持续按压 - echo
         - 按下瞬间 - pressed
         - 抬起瞬间 - released
      ```
-     # 这是一个可能的示例，但建议使用输入动作来代替
+     # 这是一个可能的示例，但针对键盘输入建议使用映射来代替
      func _input(event):
-	    if event is InputEventKey and event.pressed:
-         if event.keycode == KEY_T:
-			  print("T was pressed")
+         if event is InputEventKey and event.pressed:
+             if event.keycode == KEY_T:
+                 print("T was pressed")
+     ```
+
+3. _Input
+   - 键盘输入事件如上
+   - 鼠标输入事件 - InputEventMouse
+     - 相仿的，也有事件属性
+     - 鼠标事件继承自 InputEventMouse 并被分成 InputEventMouseButton 和 InputEventMouseMotion 两种类型。注意，这意味着所有鼠标事件都包含 position 属性。
+       - pressed
+       - position - 位置
+       - button_mask - 名称
+       - relative - 移动距离
+
+4. 输入映射
+   - 可以设置一些自定义的虚拟按键
+   - 通过设定一个虚拟按键的名称和指定这个虚拟按键触发需要的物理按键即可映射
+   - 可以多个物理按键指向同一个虚拟按键
+     ```
+     # 刚按下
+     if event.is_action_just_pressed("jump"):
+         jump_start()
+     # 按下中
+     if event.is_action_pressed("jump"):
+         jump_continue()
+     # 刚释放
+     if event.is_action_just_released("jump"):
+         jump_over()
      ```
