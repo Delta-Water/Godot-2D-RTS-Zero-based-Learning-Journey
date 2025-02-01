@@ -206,3 +206,33 @@ Gogot认为，游戏是由一个个场景组成的，而一个个场景中的背
    ```
 
 ## 游戏场景的基本使用
+
+1. 获取场景树
+
+   ```
+   var st = this.get_tree()
+   ```
+
+3. 切换场景
+
+   - 方法一
+   ```
+   st.change_scene_to_file("scene_file_path")
+   ```
+
+   - 方法二
+   ```
+   # 在编辑器中指明此变量的场景
+   @export var new_scene
+   st.change_scene_to_packed(new_scene)
+   ```
+
+2. 实例化场景
+
+###### 相当于unity中的预制体
+
+   ```
+   @export var new_scene
+   var a_node = new_scene.instantiate()
+   this.get_tree().current_scene.add_child(a_node) # 向根场景添加新的场景
+   ```
