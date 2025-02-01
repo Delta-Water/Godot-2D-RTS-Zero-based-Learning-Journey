@@ -34,17 +34,51 @@ Gogot认为，游戏是由一个个场景组成的，而一个个场景中的背
 
 ### 脚本基础
 
-1. 脚本的几个重要方法：
-   1. _enter_tree() - 创建
+1. 脚本的几个重要的生命周期方法：
+   1. _enter_tree() - 进入树
       - 系统正序调用
-   2. _ready() - 所有子节点创建
+   2. _ready() - 所有子节点进入树
       - 系统倒序调用
    3. _process() - 帧
    4. _physics_process() - 物理计算
-   5. _exit_tree() - 销毁
+   5. _exit_tree() - 离开树
 
 请不要在`enter_tree()`中放置涉及和子节点有关的初始化代码，因为此时子节点可能还没有被创建
 
 ## 1.31
 
 修订
+
+## 2.1
+
+修订
+
+### 按键输入
+
+###### Input类
+
+1. 鼠标设置 - MouseMode
+###### 枚举变量 - MouseModeEnum
+   - Visible - 显示（默认）
+   - Hidden - 隐藏
+   - Captured - 锁定在窗口中心并隐藏
+   - Confined - 限制
+   - ConfinedHidden - 限制并隐藏
+
+2. 按键输入
+###### 放在_process中判断（逐帧判断按键的按下情况）
+
+   - 是否按下某键 is_key_pressed( keycode || Key.KEY_ANY)
+   - 按下按键触发 _input(event: InputEvent)
+     - 应当先判断事件类型是否为键盘类型 - InputEventKey
+     - 优点：能够判断状态
+        - 持续按压 - echo
+        - 按下瞬间 - pressed
+        - 抬起瞬间 - released
+     ```
+     # 这是一个可能的示例，但建议使用输入动作来代替
+     func _input(event):
+	    if event is InputEventKey and event.pressed:
+         if event.keycode == KEY_T:
+			  print("T was pressed")
+     ```
