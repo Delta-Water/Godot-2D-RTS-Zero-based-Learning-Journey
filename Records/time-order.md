@@ -2,9 +2,9 @@
 
 ###### 按时间线排序
 
-## 1.27
+# 1.27
 
-### 游戏构成
+## 游戏构成
 
 1. 场景 - 节点树
 2. 节点 - Object
@@ -15,7 +15,7 @@ Gogot认为，游戏是由一个个场景组成的，而一个个场景中的背
 
 这并不意味着其不能编写复杂的代码逻辑，相反，这是一种面向对象编程的体现，通过重写和拓展相关函数的内容，可以很方便的实现复杂的业务需要
 
-### Object中的从属关系
+## Object中的从属关系
 
 1. Node节点
    1. Node3D - 3D
@@ -32,7 +32,7 @@ Gogot认为，游戏是由一个个场景组成的，而一个个场景中的背
 
 我会优先了解`CanvasItem`（其实就是2D）和`RefCounted功能类节点`中的有关知识
 
-### 脚本基础
+## 脚本基础
 
 1. 脚本的几个重要的生命周期方法：
    1. _enter_tree() - 进入树
@@ -45,20 +45,19 @@ Gogot认为，游戏是由一个个场景组成的，而一个个场景中的背
 
 请不要在`enter_tree()`中放置涉及和子节点有关的初始化代码，因为此时子节点可能还没有被创建
 
-## 1.31
+# 1.31
 
 修订
 
-## 2.1
+# 2.1
 
 修订
 
-### 按键输入
+## 按键输入
 
 ###### Input类
 
 1. 鼠标设置 - MouseMode
-###### 枚举变量 - MouseModeEnum
    - Visible - 显示（默认）
    - Hidden - 隐藏
    - Captured - 锁定在窗口中心并隐藏
@@ -66,11 +65,12 @@ Gogot认为，游戏是由一个个场景组成的，而一个个场景中的背
    - ConfinedHidden - 限制并隐藏
 
 2. 按键输入
-###### 放在_process中判断（逐帧判断按键的按下情况）
 
    - 是否按下某键 is_key_pressed(keycode || Key.KEY_ANY)
    - 按下按键触发 _input(event: InputEvent)
-     - 应当先判断事件类型是否为键盘类型 - InputEventKey
+
+3. _input
+   - 键盘输入事件 - InputEventKey
      - 优点：能通过属性够判断状态
         - 持续按压 - echo
         - 按下瞬间 - pressed
@@ -83,18 +83,24 @@ Gogot认为，游戏是由一个个场景组成的，而一个个场景中的背
              if event.keycode == KEY_T:
                  print("T was pressed")
      ```
-
-3. _input
-   - 键盘输入事件如上
+     
    - 鼠标输入事件 - InputEventMouse
-     - 相仿的，也有事件属性
      - 鼠标事件继承自 InputEventMouse 并被分成 InputEventMouseButton 和 InputEventMouseMotion 两种类型。注意，这意味着所有鼠标事件都包含 position 属性。
        - pressed
        - position - 位置
        - button_mask - 名称
        - relative - 移动距离
 
-4. 输入映射
+     ```
+     func _input(event):
+         if event is InputEventMouseButton:
+		print("Mouse Click/Unclick at: ", event.position)
+         elif event is InputEventMouseMotion:
+		print("Mouse Motion at: ", event.position)
+		print(event.relative)
+     ```
+
+5. 输入映射
    - 可以设置一些自定义的虚拟按键
    - 通过在`项目设置`中设定一个虚拟按键的名称和指定这个虚拟按键触发需要的物理按键即可映射
    - 可以多个物理按键指向同一个虚拟按键
@@ -128,34 +134,34 @@ Gogot认为，游戏是由一个个场景组成的，而一个个场景中的背
      print(v)
      ```
 
-### 获取父子节点
+## 获取父子节点
 
 1. 获取当前场景的根节点
 
    ```
-   root = this.get_tree().current_scene
+   var root = this.get_tree().current_scene
    ```
 
 2. 寻找某一节点
 
    ```
-   root = this.get_tree().current_scene
-   a_node = root.find_child("a_node_name_string")
+   var root = this.get_tree().current_scene
+   var a_node = root.find_child("a_node_name_string")
    ```
 
 3. 删除某一节点
 
    ```
-   root = this.get_tree().current_scene
-   a_node = root.find_child("a_node_name_string")
+   var root = this.get_tree().current_scene
+   var a_node = root.find_child("a_node_name_string")
    a_node.queue_free()
    ```
 
 4. 更改节点的父子关系
 
    ```
-   root = this.get_tree().current_scene
-   a_node = root.find_child("a_node_name_string")
+   var root = this.get_tree().current_scene
+   var a_node = root.find_child("a_node_name_string")
    root.remove_child(a_node)
    this.add_child(a_node)
    ```
@@ -163,7 +169,7 @@ Gogot认为，游戏是由一个个场景组成的，而一个个场景中的背
 5. 新建一个子节点
 
    ```
-   new_node = new Node2D()
+   var new_node = new Node2D()
    new_node.Name = "new"
    this.add_child(new_node)
    ```
@@ -199,6 +205,4 @@ Gogot认为，游戏是由一个个场景组成的，而一个个场景中的背
    get_node("/root/MyGame")
    ```
 
-### 游戏场景的基本使用
-
-1. 
+## 游戏场景的基本使用
