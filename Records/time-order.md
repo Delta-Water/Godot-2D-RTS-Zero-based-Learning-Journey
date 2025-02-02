@@ -67,7 +67,6 @@ Gogot认为，游戏是由一个个场景组成的，而一个个场景中的背
 2. 按键输入
 
    - 是否按下某键 is_key_pressed(keycode || Key.KEY_ANY)
-   - 按下按键触发 _input(event: InputEvent)
 
 3. _input
    - 键盘输入事件 - InputEventKey
